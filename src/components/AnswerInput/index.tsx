@@ -6,7 +6,7 @@ interface Props {
   onInput: (answer: string) => void;
 }
 
-export default function Form({ onInput }: Props) {
+function AnswerInput({ onInput }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -20,15 +20,17 @@ export default function Form({ onInput }: Props) {
   };
 
   return (
-    <form className={styles.container}>
-      <p className={styles.prefix}>/</p>
+    <div className={styles.container}>
+      <p className={styles.fix}>/</p>
       <input
         ref={inputRef}
         autoComplete="off"
         onInput={handleInput}
         type="text"
       />
-      <p className={styles.postfix}>/g</p>
-    </form>
+      <p className={styles.fix}>/g</p>
+    </div>
   );
 }
+
+export default AnswerInput;

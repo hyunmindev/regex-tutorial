@@ -4,6 +4,8 @@ interface Props {
   content: string;
 }
 
-export default function QuestionLabel({ content }: Props) {
+function QuestionLabel({ content }: Props) {
   return <p className={styles.container}>{content}</p>;
 }
+
+export default QuestionLabel;

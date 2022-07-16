@@ -7,7 +7,7 @@ interface Props {
   type?: 'button' | 'submit';
 }
 
-export default function Button({ type, children }: Props) {
+function Button({ type, children }: Props) {
   return (
     <button
       className={styles.container}
@@ -21,3 +21,5 @@ export default function Button({ type, children }: Props) {
 Button.defaultProps = {
   type: 'button',
 };
+
+export default Button;
