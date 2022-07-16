@@ -9,11 +9,12 @@ h4,
 h5,
 h6,
 p {
-  font-family: monospace;
+  font-family: 'Fira Mono', monospace;
   color: var(--primary);
 }
 
 input {
+  font-family: 'Fira Mono', monospace;
   background-color: transparent;
   color: var(--primary);
   &:focus {

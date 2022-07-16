@@ -1,34 +1,34 @@
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { ChangeEvent, useEffect, useRef } from 'react';
 
-interface FormValues {
-  answer: string;
-}
+import styles from './index.module.scss';
 
 interface Props {
-  onSubmit: (data: string) => void;
+  onInput: (answer: string) => void;
 }
 
-export default function Form({ onSubmit }: Props) {
-  const { register, handleSubmit, setFocus, resetField } =
-    useForm<FormValues>();
+export default function Form({ onInput }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setFocus('answer');
+    inputRef.current?.focus();
   }, []);
 
+  const handleInput = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    onInput(value);
+  };
+
   return (
-    <form
-      /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
-      onSubmit={handleSubmit(({ answer }) => {
-        onSubmit(answer);
-        resetField('answer');
-      })}
-    >
+    <form className={styles.container}>
+      <p className={styles.prefix}>/</p>
       <input
+        ref={inputRef}
         autoComplete="off"
-        {...register('answer')}
+        onInput={handleInput}
+        type="text"
       />
+      <p className={styles.postfix}>/g</p>
     </form>
   );
 }
