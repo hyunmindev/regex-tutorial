@@ -12,10 +12,20 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "no-magic-numbers": "error",
+    "sort-keys": [
+      "error",
+      "asc",
+      {
+        "natural": true
+      }
+    ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "react/button-has-type": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-sort-props": "error",
     "react/jsx-filename-extension": [
       "error",
       {
