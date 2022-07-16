@@ -1,3 +1,9 @@
+import Input from '@/components/Input';
+
 export default function Index() {
-  return <div>test</div>;
+  return (
+    <div>
+      <Input />
+    </div>
+  );
 }
