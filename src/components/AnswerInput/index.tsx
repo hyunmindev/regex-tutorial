@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { ChangeEvent, memo, useEffect, useRef } from 'react';
 
 import styles from './index.module.scss';
 
@@ -33,4 +33,4 @@ function AnswerInput({ onInput }: Props) {
   );
 }
 
-export default AnswerInput;
+export default memo(AnswerInput);
