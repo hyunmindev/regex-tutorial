@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import styles from './index.module.scss';
-
 interface FormValues {
   answer: string;
 }
@@ -21,14 +19,16 @@ export default function Form({ onSubmit }: Props) {
 
   return (
     <form
-      className={styles.container}
       /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
       onSubmit={handleSubmit(({ answer }) => {
         onSubmit(answer);
         resetField('answer');
       })}
     >
-      <input {...register('answer')} />
+      <input
+        autoComplete="off"
+        {...register('answer')}
+      />
     </form>
   );
 }

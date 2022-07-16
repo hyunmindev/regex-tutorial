@@ -12,3 +12,11 @@ p {
   font-family: monospace;
   color: var(--primary);
 }
+
+input {
+  background-color: transparent;
+  color: var(--primary);
+  &:focus {
+    outline: none;
+  }
+}
