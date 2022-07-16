@@ -16,6 +16,7 @@
     "sass": "^1.53.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^12.2.2",
     "@types/node": "18.0.4",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
@@ -37,6 +38,8 @@
     "typescript": "4.7.4"
   },
   "lint-staged": {
-    "**/*.{tsx,ts,jsx,js}": "npm run lint"
+    "*.{tsx,ts,jsx,js}": [
+      "eslint --fix"
+    ]
   }
 }
