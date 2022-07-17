@@ -9,6 +9,7 @@ import TitleLabel from '@/components/TitleLabel';
 import { APP_TITLE } from '@/constants/meta';
 import questions from '@/constants/questions';
 import useConfetti from '@/hooks/useConfetti';
+import useEnter from '@/hooks/useEnter';
 import styles from '@/styles/pages/Question.module.scss';
 
 function Question() {
@@ -18,15 +19,22 @@ function Question() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [matches, setMatches] = useState<string[]>([]);
 
-  useConfetti(isCorrect);
-
   const { id } = router.query;
+
+  useConfetti(isCorrect);
+  useEnter(() => {
+    const ID_DIFF = 1;
+    const nextID = Number(id) + ID_DIFF;
+    // eslint-disable-next-line no-void
+    void router.push(`/questions/${nextID}`);
+  });
 
   useEffect(() => {
     if (!id) {
       return;
     }
-    const question = questions[+id];
+
+    const question = questions[Number(id)];
     if (question) {
       setIsLoading(false);
       return;
@@ -39,20 +47,23 @@ function Question() {
     title = '',
     paragraph = '',
     answer: questionAnswer = '',
-  } = questions[+(id ?? '')] ?? {};
+  } = questions[Number(id)] ?? {};
 
-  const handleInput = useCallback((answer: string) => {
-    try {
-      const regExp = new RegExp(answer, 'g');
-      const result = paragraph.match(regExp);
-      setMatches([...(result ?? [])]);
-      setIsValidate(true);
-    } catch (e) {
-      setIsValidate(false);
-    } finally {
-      setIsCorrect(questionAnswer === answer);
-    }
-  }, []);
+  const handleInput = useCallback(
+    (answer: string) => {
+      try {
+        const regExp = new RegExp(answer, 'g');
+        const result = paragraph.match(regExp);
+        setMatches([...(result ?? [])]);
+        setIsValidate(true);
+      } catch (e) {
+        setIsValidate(false);
+      } finally {
+        setIsCorrect(questionAnswer === answer);
+      }
+    },
+    [id]
+  );
 
   if (isLoading) {
     return null;
@@ -73,7 +84,14 @@ function Question() {
           matches={matches}
         />
         <AnswerInput onInput={handleInput} />
-        <p className={styles.error}>{isValidate ? '' : 'is not validate'}</p>
+        <div className={styles.message}>
+          {!isValidate && <p className={styles.error}>is not validate</p>}
+          {isCorrect && (
+            <p className={styles.success}>
+              press {`'`}ENTER{`'`} to next question
+            </p>
+          )}
+        </div>
       </div>
     </>
   );

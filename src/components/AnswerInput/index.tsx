@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { ChangeEvent, memo, useEffect, useRef } from 'react';
 
 import styles from './index.module.scss';
@@ -8,10 +9,14 @@ interface Props {
 
 function AnswerInput({ onInput }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    if (inputRef.current) {
+      inputRef.current.focus();
+      // inputRef.current.value = '';
+    }
+  }, [router.query.id]);
 
   const handleInput = ({
     target: { value },

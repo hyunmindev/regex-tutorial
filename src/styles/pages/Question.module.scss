@@ -6,8 +6,15 @@
   height: 100vh;
 }
 
-.error {
+.message {
   height: 24px;
   margin: 16px;
+}
+
+.error {
   color: var(--error);
+}
+
+.success {
+  color: var(--success);
 }
