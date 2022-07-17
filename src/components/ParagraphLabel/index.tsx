@@ -26,7 +26,7 @@ const highlight = (content: string, matches: string[]) => {
   }, content);
 };
 
-function QuestionLabel({ content, matches }: Props) {
+function ParagraphLabel({ content, matches }: Props) {
   const highlightedContent = highlight(content, matches);
 
   return (
@@ -38,4 +38,4 @@ function QuestionLabel({ content, matches }: Props) {
   );
 }
 
-export default QuestionLabel;
+export default ParagraphLabel;
