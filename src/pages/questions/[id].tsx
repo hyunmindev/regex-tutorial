@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 import AnswerInput from '@/components/AnswerInput';
+import Header from '@/components/Header';
 import ParagraphLabel from '@/components/ParagraphLabel';
 import TitleLabel from '@/components/TitleLabel';
 import { APP_TITLE } from '@/constants/meta';
@@ -65,6 +66,7 @@ function Question() {
           {APP_TITLE} : {title}
         </title>
       </Head>
+      <Header />
       <div className={styles.container}>
         <TitleLabel content={title} />
         <ParagraphLabel
