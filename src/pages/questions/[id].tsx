@@ -7,6 +7,7 @@ import ParagraphLabel from '@/components/ParagraphLabel';
 import TitleLabel from '@/components/TitleLabel';
 import { APP_TITLE } from '@/constants/meta';
 import questions from '@/constants/questions.json';
+import useConfetti from '@/hooks/useConfetti';
 import styles from '@/styles/pages/Index.module.scss';
 import { Question } from '@/types/question';
 
@@ -14,9 +15,31 @@ function Question() {
   const router = useRouter();
   const [isValidate, setIsValidate] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCorrect, setIsCorrect] = useState(false);
   const [matches, setMatches] = useState<string[]>([]);
-  const [paragraph, setParagraph] = useState('');
-  const [title, setTitle] = useState('');
+
+  useConfetti(isCorrect);
+
+  const { id } = router.query;
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    const question = questions[+id] as Question;
+    if (question) {
+      setIsLoading(false);
+      return;
+    }
+    // eslint-disable-next-line no-void
+    void router.replace('/');
+  }, [id]);
+
+  const {
+    title = '',
+    paragraph = '',
+    answer: questionAnswer = '',
+  } = (questions[+(id ?? '')] as Question) ?? {};
 
   const handleInput = useCallback((answer: string) => {
     try {
@@ -26,24 +49,10 @@ function Question() {
       setIsValidate(true);
     } catch (e) {
       setIsValidate(false);
+    } finally {
+      setIsCorrect(questionAnswer === answer);
     }
   }, []);
-
-  useEffect(() => {
-    const { id } = router.query;
-    if (!id) {
-      return;
-    }
-    const question = questions[+id] as Question;
-    if (!question) {
-      // eslint-disable-next-line no-void
-      void router.replace('/');
-      return;
-    }
-    setTitle(question.title);
-    setParagraph(question.paragraph);
-    setIsLoading(false);
-  }, [router.query.id]);
 
   if (isLoading) {
     return null;
