@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.error {
+  height: 24px;
+  margin: 16px;
+  color: var(--error);
+}

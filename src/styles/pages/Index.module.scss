@@ -1,13 +1,31 @@
 .container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+
+  b {
+    background-color: var(--highlight);
+    box-shadow: 0 0 0 0.5px var(--background) inset;
+    border-radius: 4px;
+    padding-bottom: 2px;
+  }
 }
 
-.error {
-  height: 24px;
+.questions {
+  display: flex;
+}
+
+.question {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 256px;
+  height: 64px;
+  border-radius: 8px;
+  background: #2c3639;
+  box-shadow: 2px 2px 3px #252e30, -2px -2px 3px #333e42;
   margin: 16px;
-  color: var(--error);
 }

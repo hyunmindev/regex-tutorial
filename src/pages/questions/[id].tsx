@@ -7,10 +7,9 @@ import Header from '@/components/Header';
 import ParagraphLabel from '@/components/ParagraphLabel';
 import TitleLabel from '@/components/TitleLabel';
 import { APP_TITLE } from '@/constants/meta';
-import questions from '@/constants/questions.json';
+import questions from '@/constants/questions';
 import useConfetti from '@/hooks/useConfetti';
-import styles from '@/styles/pages/Index.module.scss';
-import { Question } from '@/types/question';
+import styles from '@/styles/pages/Question.module.scss';
 
 function Question() {
   const router = useRouter();
@@ -27,7 +26,7 @@ function Question() {
     if (!id) {
       return;
     }
-    const question = questions[+id] as Question;
+    const question = questions[+id];
     if (question) {
       setIsLoading(false);
       return;
@@ -40,7 +39,7 @@ function Question() {
     title = '',
     paragraph = '',
     answer: questionAnswer = '',
-  } = (questions[+(id ?? '')] as Question) ?? {};
+  } = questions[+(id ?? '')] ?? {};
 
   const handleInput = useCallback((answer: string) => {
     try {
