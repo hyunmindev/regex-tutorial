@@ -2,6 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import Next from '@/assets/icons/next.svg';
+import Prev from '@/assets/icons/prev.svg';
 import AnswerInput from '@/components/AnswerInput';
 import Header from '@/components/Header';
 import ParagraphLabel from '@/components/ParagraphLabel';
@@ -38,7 +40,6 @@ function Question() {
     if (Number.isNaN(id)) {
       return;
     }
-
     const question = questions[id];
     if (!question) {
       // eslint-disable-next-line no-void
@@ -90,6 +91,18 @@ function Question() {
             </p>
           )}
         </div>
+        <button
+          className={styles.prev}
+          type="button"
+        >
+          <Prev />
+        </button>
+        <button
+          className={styles.next}
+          type="button"
+        >
+          <Next />
+        </button>
       </div>
     </>
   );
