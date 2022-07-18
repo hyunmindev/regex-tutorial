@@ -23,12 +23,16 @@ function Question() {
   const id = Number(router.query.id);
 
   useConfetti(isCorrect);
+
   useEnter(() => {
+    if (!isCorrect) {
+      return;
+    }
     const ID_DIFF = 1;
     const nextID = id + ID_DIFF;
     // eslint-disable-next-line no-void
     void router.push(`/questions/${nextID}`);
-  }, [id]);
+  }, [id, isCorrect]);
 
   useEffect(() => {
     if (Number.isNaN(id)) {
@@ -36,19 +40,15 @@ function Question() {
     }
 
     const question = questions[id];
-    if (question) {
-      setIsLoading(false);
+    if (!question) {
+      // eslint-disable-next-line no-void
+      void router.replace('/');
       return;
     }
-    // eslint-disable-next-line no-void
-    void router.replace('/');
+    setIsLoading(false);
   }, [id]);
 
-  const {
-    title = '',
-    paragraph = '',
-    answer: questionAnswer = '',
-  } = questions[id] ?? {};
+  const { title, paragraph, answer: questionAnswer } = questions[id] ?? {};
 
   useEffect(() => {
     try {
@@ -76,9 +76,9 @@ function Question() {
       </Head>
       <Header />
       <div className={styles.container}>
-        <TitleLabel content={title} />
+        <TitleLabel content={title ?? ''} />
         <ParagraphLabel
-          content={paragraph}
+          content={paragraph ?? ''}
           matches={matches}
         />
         <AnswerInput bind={[answer, setAnswer]} />
