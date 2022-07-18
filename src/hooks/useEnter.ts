@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { DependencyList, useEffect } from 'react';
 
-export default (callback: () => void) => {
+export default (callback: () => void, deps: DependencyList) => {
   const handleKeydown = ({ key }: KeyboardEvent) => {
     if (key === 'Enter') {
       callback();
@@ -12,5 +12,5 @@ export default (callback: () => void) => {
     return () => {
       window.removeEventListener('keydown', handleKeydown);
     };
-  }, []);
+  }, deps);
 };

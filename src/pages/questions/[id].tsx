@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import AnswerInput from '@/components/AnswerInput';
 import Header from '@/components/Header';
@@ -18,23 +18,24 @@ function Question() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
   const [matches, setMatches] = useState<string[]>([]);
+  const [answer, setAnswer] = useState('');
 
-  const { id } = router.query;
+  const id = Number(router.query.id);
 
   useConfetti(isCorrect);
   useEnter(() => {
     const ID_DIFF = 1;
-    const nextID = Number(id) + ID_DIFF;
+    const nextID = id + ID_DIFF;
     // eslint-disable-next-line no-void
     void router.push(`/questions/${nextID}`);
-  });
+  }, [id]);
 
   useEffect(() => {
-    if (!id) {
+    if (Number.isNaN(id)) {
       return;
     }
 
-    const question = questions[Number(id)];
+    const question = questions[id];
     if (question) {
       setIsLoading(false);
       return;
@@ -47,23 +48,20 @@ function Question() {
     title = '',
     paragraph = '',
     answer: questionAnswer = '',
-  } = questions[Number(id)] ?? {};
+  } = questions[id] ?? {};
 
-  const handleInput = useCallback(
-    (answer: string) => {
-      try {
-        const regExp = new RegExp(answer, 'g');
-        const result = paragraph.match(regExp);
-        setMatches([...(result ?? [])]);
-        setIsValidate(true);
-      } catch (e) {
-        setIsValidate(false);
-      } finally {
-        setIsCorrect(questionAnswer === answer);
-      }
-    },
-    [id]
-  );
+  useEffect(() => {
+    try {
+      const regExp = new RegExp(answer, 'g');
+      const result = paragraph.match(regExp);
+      setMatches([...(result ?? [])]);
+      setIsValidate(true);
+    } catch (e) {
+      setIsValidate(false);
+    } finally {
+      setIsCorrect(questionAnswer === answer);
+    }
+  }, [answer, id]);
 
   if (isLoading) {
     return null;
@@ -83,7 +81,7 @@ function Question() {
           content={paragraph}
           matches={matches}
         />
-        <AnswerInput onInput={handleInput} />
+        <AnswerInput bind={[answer, setAnswer]} />
         <div className={styles.message}>
           {!isValidate && <p className={styles.error}>is not validate</p>}
           {isCorrect && (

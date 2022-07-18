@@ -1,27 +1,35 @@
 import { useRouter } from 'next/router';
-import { ChangeEvent, memo, useEffect, useRef } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  memo,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react';
 
 import styles from './index.module.scss';
 
 interface Props {
-  onInput: (answer: string) => void;
+  bind: [string, Dispatch<SetStateAction<string>>];
 }
 
-function AnswerInput({ onInput }: Props) {
+function AnswerInput({ bind }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const [value, setValue] = bind;
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
-      // inputRef.current.value = '';
+      setValue('');
     }
   }, [router.query.id]);
 
   const handleInput = ({
-    target: { value },
+    target: { value: _value },
   }: ChangeEvent<HTMLInputElement>) => {
-    onInput(value);
+    setValue(_value);
   };
 
   return (
@@ -32,6 +40,7 @@ function AnswerInput({ onInput }: Props) {
         autoComplete="off"
         onInput={handleInput}
         type="text"
+        value={value}
       />
       <p className={styles.fix}>/g</p>
     </div>
