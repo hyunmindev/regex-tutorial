@@ -14,6 +14,8 @@ import useConfetti from '@/hooks/useConfetti';
 import useEnter from '@/hooks/useEnter';
 import styles from '@/styles/pages/Question.module.scss';
 
+const ID_DIFF = 1;
+
 function Question() {
   const router = useRouter();
   const [isValidate, setIsValidate] = useState(true);
@@ -30,10 +32,8 @@ function Question() {
     if (!isCorrect) {
       return;
     }
-    const ID_DIFF = 1;
-    const nextID = id + ID_DIFF;
     // eslint-disable-next-line no-void
-    void router.push(`/questions/${nextID}`);
+    void router.push(`/questions/${id + ID_DIFF}`);
   }, [id, isCorrect]);
 
   useEffect(() => {
@@ -93,12 +93,20 @@ function Question() {
         </div>
         <button
           className={styles.prev}
+          onClick={() => {
+            // eslint-disable-next-line no-void
+            void router.push(`/questions/${id - ID_DIFF}`);
+          }}
           type="button"
         >
           <Prev />
         </button>
         <button
           className={styles.next}
+          onClick={() => {
+            // eslint-disable-next-line no-void
+            void router.push(`/questions/${id + ID_DIFF}`);
+          }}
           type="button"
         >
           <Next />
