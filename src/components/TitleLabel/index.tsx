@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import styles from './index.module.scss';
 
 interface Props {
@@ -8,4 +10,4 @@ function TitleLabel({ content }: Props) {
   return <h1 className={styles.container}>{content}</h1>;
 }
 
-export default TitleLabel;
+export default memo(TitleLabel);
