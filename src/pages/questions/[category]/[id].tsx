@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Next from '@/assets/icons/next.svg';
 import Prev from '@/assets/icons/prev.svg';
@@ -19,12 +19,21 @@ const ID_DIFF = 1;
 function Question() {
   const router = useRouter();
   const [isValidate, setIsValidate] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
   const [matches, setMatches] = useState<string[]>([]);
   const [answer, setAnswer] = useState('');
 
-  const { paragraph, title, id, answer: questionAnswer } = useQuestion();
+  const {
+    id,
+    title,
+    category,
+    paragraph,
+    isLoading,
+    answer: questionAnswer,
+  } = useQuestion();
+
+  const pushNextQuestion = () =>
+    void router.push(`/questions/${category}/${id + ID_DIFF}`);
 
   useConfetti(isCorrect);
 
@@ -32,10 +41,10 @@ function Question() {
     if (!isCorrect) {
       return;
     }
-    void router.push(`/questions/${id + ID_DIFF}`);
+    pushNextQuestion();
   }, [id, isCorrect]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     try {
       const regExp = new RegExp(answer, 'g');
       const result = paragraph.match(regExp);
@@ -77,18 +86,14 @@ function Question() {
         </div>
         <button
           className={styles.prev}
-          onClick={() => {
-            void router.push(`/questions/${id - ID_DIFF}`);
-          }}
+          onClick={pushNextQuestion}
           type="button"
         >
           <Prev />
         </button>
         <button
           className={styles.next}
-          onClick={() => {
-            void router.push(`/questions/${id + ID_DIFF}`);
-          }}
+          onClick={pushNextQuestion}
           type="button"
         >
           <Next />
