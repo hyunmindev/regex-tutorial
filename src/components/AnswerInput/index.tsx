@@ -12,9 +12,10 @@ import styles from './index.module.scss';
 
 interface Props {
   bind: [string, Dispatch<SetStateAction<string>>];
+  flags: string[];
 }
 
-function AnswerInput({ bind }: Props) {
+function AnswerInput({ bind, flags }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [value, setValue] = bind;
@@ -42,7 +43,7 @@ function AnswerInput({ bind }: Props) {
         type="text"
         value={value}
       />
-      <p className={styles.fix}>/g</p>
+      <p className={styles.fix}>/{flags.map((flag) => flag)}</p>
     </div>
   );
 }

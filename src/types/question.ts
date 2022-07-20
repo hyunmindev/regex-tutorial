@@ -1,6 +1,7 @@
 export interface Question {
   id: number;
+  flags: string[];
   title: string;
   paragraph: string;
-  answer: string;
+  answers: string[];
 }

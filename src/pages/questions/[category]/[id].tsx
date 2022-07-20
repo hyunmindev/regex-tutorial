@@ -23,14 +23,8 @@ function Question() {
   const [matches, setMatches] = useState<string[]>([]);
   const [answer, setAnswer] = useState('');
 
-  const {
-    id,
-    title,
-    category,
-    paragraph,
-    isLoading,
-    answer: questionAnswer,
-  } = useQuestion();
+  const { id, title, flags, answers, category, paragraph, isLoading } =
+    useQuestion();
 
   const pushNextQuestion = () =>
     void router.push(`/questions/${category}/${id + ID_DIFF}`);
@@ -46,14 +40,14 @@ function Question() {
 
   useEffect(() => {
     try {
-      const regExp = new RegExp(answer, 'g');
+      const regExp = new RegExp(answer, flags.join(''));
       const result = paragraph.match(regExp);
       setMatches([...(result ?? [])]);
       setIsValidate(true);
     } catch (e) {
       setIsValidate(false);
     } finally {
-      setIsCorrect(questionAnswer === answer);
+      setIsCorrect((answers ?? []).includes(answer));
     }
   }, [answer, id]);
 
@@ -75,7 +69,10 @@ function Question() {
           content={paragraph ?? ''}
           matches={matches}
         />
-        <AnswerInput bind={[answer, setAnswer]} />
+        <AnswerInput
+          bind={[answer, setAnswer]}
+          flags={flags}
+        />
         <div className={styles.message}>
           {!isValidate && <p className={styles.error}>is not validate</p>}
           {isCorrect && (
