@@ -9,7 +9,6 @@ const ZERO = 0;
 export default () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-
   const { id: rawId, category: rawCategory } = router.query;
 
   const id = Number(rawId);
@@ -28,6 +27,7 @@ export default () => {
   }, [category]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (Number.isNaN(id)) {
       return;
     }
