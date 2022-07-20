@@ -6,7 +6,6 @@ import Home from '@/assets/icons/home.svg';
 import styles from './index.module.scss';
 
 function Header() {
-  console.log('here?');
   return (
     <nav className={styles.container}>
       <Link href="/">

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 import Next from '@/assets/icons/next.svg';
 import Prev from '@/assets/icons/prev.svg';
@@ -9,9 +9,9 @@ import Header from '@/components/Header';
 import ParagraphLabel from '@/components/ParagraphLabel';
 import TitleLabel from '@/components/TitleLabel';
 import { APP_TITLE } from '@/constants/meta';
-import questions from '@/constants/questions';
 import useConfetti from '@/hooks/useConfetti';
 import useEnter from '@/hooks/useEnter';
+import useQuestion from '@/hooks/useQuestion';
 import styles from '@/styles/pages/Question.module.scss';
 
 const ID_DIFF = 1;
@@ -24,7 +24,7 @@ function Question() {
   const [matches, setMatches] = useState<string[]>([]);
   const [answer, setAnswer] = useState('');
 
-  const id = Number(router.query.id);
+  const { paragraph, title, id, answer: questionAnswer } = useQuestion();
 
   useConfetti(isCorrect);
 
@@ -32,26 +32,10 @@ function Question() {
     if (!isCorrect) {
       return;
     }
-    // eslint-disable-next-line no-void
     void router.push(`/questions/${id + ID_DIFF}`);
   }, [id, isCorrect]);
 
-  useEffect(() => {
-    if (Number.isNaN(id)) {
-      return;
-    }
-    const question = questions[id];
-    if (!question) {
-      // eslint-disable-next-line no-void
-      void router.replace('/');
-      return;
-    }
-    setIsLoading(false);
-  }, [id]);
-
-  const { title, paragraph, answer: questionAnswer } = questions[id] ?? {};
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
       const regExp = new RegExp(answer, 'g');
       const result = paragraph.match(regExp);
@@ -94,7 +78,6 @@ function Question() {
         <button
           className={styles.prev}
           onClick={() => {
-            // eslint-disable-next-line no-void
             void router.push(`/questions/${id - ID_DIFF}`);
           }}
           type="button"
@@ -104,7 +87,6 @@ function Question() {
         <button
           className={styles.next}
           onClick={() => {
-            // eslint-disable-next-line no-void
             void router.push(`/questions/${id + ID_DIFF}`);
           }}
           type="button"

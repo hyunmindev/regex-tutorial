@@ -3,8 +3,9 @@ import Link from 'next/link';
 
 import AppTitle from '@/components/AppTitle';
 import { APP_TITLE } from '@/constants/meta';
-import questions from '@/constants/questions';
+import questionCollection from '@/constants/questionCollection';
 import styles from '@/styles/pages/Index.module.scss';
+import { camelToKebab, decamelize } from '@/utils/caseConverter';
 
 function Index() {
   return (
@@ -15,13 +16,13 @@ function Index() {
       <div className={styles.container}>
         <AppTitle />
         <div className={styles.questions}>
-          {questions.map(({ id, title }) => (
+          {Object.keys(questionCollection).map((category) => (
             <Link
-              key={id}
-              href={`/questions/${id}`}
+              key={category}
+              href={`/questions/${camelToKebab(category)}/0`}
             >
               <a className={styles.question}>
-                <h2>{title}</h2>
+                <h2>{decamelize(category, ' ')}</h2>
               </a>
             </Link>
           ))}

@@ -15,7 +15,6 @@ const defaults = {
 };
 
 const fire = (particleRatio: number, options: Options) => {
-  // eslint-disable-next-line no-void
   void confetti({
     ...defaults,
     ...options,
