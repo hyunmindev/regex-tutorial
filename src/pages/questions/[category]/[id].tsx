@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 import Next from '@/assets/icons/next.svg';
 import Prev from '@/assets/icons/prev.svg';
@@ -36,8 +35,8 @@ function Question() {
   const { matches, isCorrect, isValidate, answerState } = useAnswer(
     id,
     flags,
-    paragraph,
-    answers
+    answers,
+    paragraph
   );
 
   const pushPrevQuestion = () =>
