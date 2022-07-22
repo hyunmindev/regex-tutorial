@@ -10,6 +10,7 @@ import HintButton from '@/components/HintButton';
 import ParagraphLabel from '@/components/ParagraphLabel';
 import TitleLabel from '@/components/TitleLabel';
 import { APP_TITLE } from '@/constants/meta';
+import useAnswer from '@/hooks/useAnswer';
 import useConfetti from '@/hooks/useConfetti';
 import useEnter from '@/hooks/useEnter';
 import useQuestion from '@/hooks/useQuestion';
@@ -19,10 +20,6 @@ const ID_DIFF = 1;
 
 function Question() {
   const router = useRouter();
-  const [isValidate, setIsValidate] = useState(true);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [matches, setMatches] = useState<string[]>([]);
-  const [answer, setAnswer] = useState('');
 
   const {
     id,
@@ -35,6 +32,13 @@ function Question() {
     paragraph,
     isLoading,
   } = useQuestion();
+
+  const { matches, isCorrect, isValidate, answerState } = useAnswer(
+    id,
+    flags,
+    paragraph,
+    answers
+  );
 
   const pushPrevQuestion = () =>
     void router.push(`/questions/${category}/${id - ID_DIFF}`);
@@ -49,19 +53,6 @@ function Question() {
     }
     pushNextQuestion();
   }, [id, isCorrect]);
-
-  useEffect(() => {
-    try {
-      const regExp = new RegExp(answer, flags.join(''));
-      const result = paragraph.match(regExp);
-      setMatches([...(result ?? [])]);
-      setIsValidate(true);
-    } catch (e) {
-      setIsValidate(false);
-    } finally {
-      setIsCorrect((answers ?? []).includes(answer));
-    }
-  }, [answer, id]);
 
   if (isLoading) {
     return null;
@@ -82,7 +73,7 @@ function Question() {
           matches={matches}
         />
         <AnswerInput
-          bind={[answer, setAnswer]}
+          bind={answerState}
           flags={flags ?? []}
         />
         <div className={styles.message}>
