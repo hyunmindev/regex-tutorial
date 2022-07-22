@@ -36,6 +36,8 @@ function Question() {
     isLoading,
   } = useQuestion();
 
+  const pushPrevQuestion = () =>
+    void router.push(`/questions/${category}/${id - ID_DIFF}`);
   const pushNextQuestion = () =>
     void router.push(`/questions/${category}/${id + ID_DIFF}`);
 
@@ -94,7 +96,7 @@ function Question() {
         {!isFirst && (
           <button
             className={styles.prev}
-            onClick={pushNextQuestion}
+            onClick={pushPrevQuestion}
             type="button"
           >
             <Prev />
