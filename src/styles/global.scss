@@ -10,13 +10,13 @@ h5,
 h6,
 p {
   font-family: 'Fira Mono', monospace;
-  color: var(--primary);
+  color: var(--text);
 }
 
 input {
   font-family: 'Fira Mono', monospace;
   background-color: transparent;
-  color: var(--primary);
+  color: var(--text);
   &:focus {
     outline: none;
   }
