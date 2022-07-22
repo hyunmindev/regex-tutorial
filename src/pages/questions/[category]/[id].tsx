@@ -62,7 +62,7 @@ function Question() {
           {APP_TITLE} : {title}
         </title>
       </Head>
-      <Header />
+      <Header title={`${category} ${id}`} />
       <div className={styles.container}>
         <TitleLabel content={title ?? ''} />
         <ParagraphLabel
@@ -71,7 +71,7 @@ function Question() {
         />
         <AnswerInput
           bind={[answer, setAnswer]}
-          flags={flags}
+          flags={flags ?? []}
         />
         <div className={styles.message}>
           {!isValidate && <p className={styles.error}>is not validate</p>}

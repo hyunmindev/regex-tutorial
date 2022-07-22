@@ -5,7 +5,11 @@ import Home from '@/assets/icons/home.svg';
 
 import styles from './index.module.scss';
 
-function Header() {
+interface Props {
+  title?: string;
+}
+
+function Header({ title }: Props) {
   return (
     <nav className={styles.container}>
       <Link href="/">
@@ -13,8 +17,13 @@ function Header() {
           <Home />
         </a>
       </Link>
+      {!!title && <h1 className={styles.title}>{title}</h1>}
     </nav>
   );
 }
+
+Header.defaultProps = {
+  title: '',
+};
 
 export default memo(Header);
