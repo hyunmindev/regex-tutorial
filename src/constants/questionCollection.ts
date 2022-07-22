@@ -10,11 +10,18 @@ export default {
       title: 'match word "simple"',
     },
     {
-      answers: ['tutorial'],
+      answers: ['useful'],
       flags: ['g'],
       id: 1,
       paragraph: 'Regular expressions are very useful.',
-      title: 'match word "tutorial"',
+      title: 'match word "useful"',
+    },
+    {
+      answers: ['\\\\'],
+      flags: ['g'],
+      id: 2,
+      paragraph: '\\ is Backslash.',
+      title: 'match word "\\"',
     },
   ],
   // eslint-disable-next-line sort-keys
