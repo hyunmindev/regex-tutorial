@@ -5,6 +5,7 @@ import questionCollection from '@/constants/questionCollection';
 import { kebabToCamel } from '@/utils/caseConverter';
 
 const ZERO = 0;
+const ONE = 1;
 
 export default () => {
   const router = useRouter();
@@ -16,6 +17,8 @@ export default () => {
 
   const questions = questionCollection[category] ?? [];
   const question = questions[id] ?? {};
+  const isFirst = ZERO === id;
+  const isLast = questions.length - ONE === id;
 
   useEffect(() => {
     if (Number.isNaN(id)) {
@@ -38,5 +41,5 @@ export default () => {
     setIsLoading(false);
   }, [id]);
 
-  return { category, isLoading, ...question };
+  return { category, isLoading, isFirst, isLast, ...question };
 };

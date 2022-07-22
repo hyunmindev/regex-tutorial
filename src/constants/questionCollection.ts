@@ -24,7 +24,6 @@ export default {
       title: 'match word "\\"',
     },
   ],
-  // eslint-disable-next-line sort-keys
   complexityMatch: [
     {
       answers: ['complexity|tutorial'],

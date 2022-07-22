@@ -23,8 +23,17 @@ function Question() {
   const [matches, setMatches] = useState<string[]>([]);
   const [answer, setAnswer] = useState('');
 
-  const { id, title, flags, answers, category, paragraph, isLoading } =
-    useQuestion();
+  const {
+    id,
+    title,
+    flags,
+    isLast,
+    isFirst,
+    answers,
+    category,
+    paragraph,
+    isLoading,
+  } = useQuestion();
 
   const pushNextQuestion = () =>
     void router.push(`/questions/${category}/${id + ID_DIFF}`);
@@ -77,24 +86,28 @@ function Question() {
           {!isValidate && <p className={styles.error}>is not validate</p>}
           {isCorrect && (
             <p className={styles.success}>
-              press {`'`}ENTER{`'`} to next question
+              press {`'`}ENTER{`'`} to {isLast ? 'quit' : 'proceed'}
             </p>
           )}
         </div>
-        <button
-          className={styles.prev}
-          onClick={pushNextQuestion}
-          type="button"
-        >
-          <Prev />
-        </button>
-        <button
-          className={styles.next}
-          onClick={pushNextQuestion}
-          type="button"
-        >
-          <Next />
-        </button>
+        {!isFirst && (
+          <button
+            className={styles.prev}
+            onClick={pushNextQuestion}
+            type="button"
+          >
+            <Prev />
+          </button>
+        )}
+        {!isLast && (
+          <button
+            className={styles.next}
+            onClick={pushNextQuestion}
+            type="button"
+          >
+            <Next />
+          </button>
+        )}
       </div>
     </>
   );
