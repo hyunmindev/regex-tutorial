@@ -1,14 +1,14 @@
+@import '@/styles/mixins/neumorphism';
+
 .container {
-  height: 64px;
-  width: 110%;
-  left: -5%;
+  @include neumorphism;
   position: absolute;
   display: flex;
-  border-radius: 50px;
-  background: #2c3639;
-  box-shadow: 2px 2px 2px #252e30, -2px -2px 3px #333e42;
-  padding: 0 10%;
   align-items: center;
+  height: 64px;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 0 5%;
 
   a {
     display: flex;

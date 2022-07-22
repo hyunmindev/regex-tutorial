@@ -1,0 +1,8 @@
+@mixin neumorphism($inset: false) {
+  background: var(--background);
+  @if ($inset) {
+    box-shadow: inset 2px 2px 3px #252e30, inset -2px -2px 3px #333e42;
+  } @else {
+    box-shadow: 2px 2px 4px #252e30, -2px -2px 4px #333e42;
+  }
+}
