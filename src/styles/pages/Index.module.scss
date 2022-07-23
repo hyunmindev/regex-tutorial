@@ -17,6 +17,15 @@
 
 .questions {
   display: flex;
+  width: 50%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 800px) {
+  .questions {
+    width: 90%;
+  }
 }
 
 .question {
@@ -25,7 +34,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 256px;
+  width: fit-content;
+  padding: 0 16px;
   height: 64px;
   border-radius: 8px;
   margin: 16px;

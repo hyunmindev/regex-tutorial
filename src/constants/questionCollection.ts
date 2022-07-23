@@ -1,7 +1,7 @@
 import { Question } from '@/types/question';
 
 export default {
-  simpleMatch: [
+  simplestMatch: [
     {
       answers: ['simple'],
       flags: ['g'],
@@ -16,6 +16,8 @@ export default {
       paragraph: 'Regular expressions are very useful.',
       title: 'match word "useful"',
     },
+  ],
+  simpleMatch: [
     {
       answers: ['\\\\'],
       flags: ['g'],
@@ -24,7 +26,7 @@ export default {
       title: 'match word "\\"',
     },
   ],
-  complexityMatch: [
+  complicatedMatch: [
     {
       answers: ['complexity|tutorial'],
       flags: ['g'],
@@ -38,6 +40,22 @@ export default {
       id: 1,
       paragraph: 'Is this complexity tutorial?',
       title: 'match word "is" not in "this"',
+    },
+  ],
+  mostComplicatedProblem: [
+    {
+      answers: ['wip'],
+      flags: ['g'],
+      id: 0,
+      paragraph: 'wip',
+      title: 'wip',
+    },
+    {
+      answers: ['wip'],
+      flags: ['g'],
+      id: 1,
+      paragraph: 'wip',
+      title: 'wip',
     },
   ],
 } as { [key: string]: Question[] };
