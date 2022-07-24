@@ -36,3 +36,9 @@ yarn-error.log*
 
 # jetbrains
 .idea
+
+# cypress
+cypress/results/*
+cypress/reports/*
+cypress/screenshots/*
+cypress/videos/*
