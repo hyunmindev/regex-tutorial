@@ -7,7 +7,7 @@ interface Props {
 }
 
 function TitleLabel({ content }: Props) {
-  return <h1 className={styles.container}>{content}</h1>;
+  return <h2 className={styles.container}>{content}</h2>;
 }
 
 export default memo(TitleLabel);

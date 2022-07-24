@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import Next from '@/assets/icons/next.svg';
@@ -14,6 +15,7 @@ import useConfetti from '@/hooks/useConfetti';
 import useEnter from '@/hooks/useEnter';
 import useQuestion from '@/hooks/useQuestion';
 import styles from '@/styles/pages/Question.module.scss';
+import { camelToKebab, decamelize } from '@/utils/caseConverter';
 
 const ID_DIFF = 1;
 
@@ -39,10 +41,9 @@ function Question() {
     paragraph
   );
 
-  const pushPrevQuestion = () =>
-    void router.push(`/questions/${category}/${id - ID_DIFF}`);
-  const pushNextQuestion = () =>
-    void router.push(`/questions/${category}/${id + ID_DIFF}`);
+  const kebabID = camelToKebab(category);
+  const prevQuestionURL = `/questions/${kebabID}/${id - ID_DIFF}`;
+  const nextQuestionURL = `/questions/${kebabID}/${id + ID_DIFF}`;
 
   useConfetti(isCorrect);
 
@@ -50,7 +51,7 @@ function Question() {
     if (!isCorrect) {
       return;
     }
-    pushNextQuestion();
+    void router.push(nextQuestionURL);
   }, [id, isCorrect]);
 
   if (isLoading) {
@@ -64,7 +65,7 @@ function Question() {
           {APP_TITLE} : {title}
         </title>
       </Head>
-      <Header title={`${category} ${id}`} />
+      <Header title={`${decamelize(category, ' ')} ${id}`} />
       <div className={styles.container}>
         <TitleLabel content={title ?? ''} />
         <ParagraphLabel
@@ -84,22 +85,18 @@ function Question() {
           )}
         </div>
         {!isFirst && (
-          <button
-            className={styles.prev}
-            onClick={pushPrevQuestion}
-            type="button"
-          >
-            <Prev />
-          </button>
+          <Link href={prevQuestionURL}>
+            <a className={styles.prev}>
+              <Prev />
+            </a>
+          </Link>
         )}
         {!isLast && (
-          <button
-            className={styles.next}
-            onClick={pushNextQuestion}
-            type="button"
-          >
-            <Next />
-          </button>
+          <Link href={nextQuestionURL}>
+            <a className={styles.next}>
+              <Next />
+            </a>
+          </Link>
         )}
       </div>
       <HintButton />

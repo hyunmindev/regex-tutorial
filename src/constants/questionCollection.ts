@@ -3,16 +3,23 @@ import { Question } from '@/types/question';
 export default {
   simplestMatch: [
     {
-      answers: ['simple'],
+      answers: ['world'],
       flags: ['g'],
       id: 0,
+      paragraph: 'Hello world',
+      title: 'match word "world"',
+    },
+    {
+      answers: ['simple'],
+      flags: ['g'],
+      id: 1,
       paragraph: 'This is simple tutorial.',
       title: 'match word "simple"',
     },
     {
       answers: ['useful'],
       flags: ['g'],
-      id: 1,
+      id: 2,
       paragraph: 'Regular expressions are very useful.',
       title: 'match word "useful"',
     },
@@ -21,7 +28,7 @@ export default {
     {
       answers: ['\\\\'],
       flags: ['g'],
-      id: 2,
+      id: 0,
       paragraph: '\\ is Backslash.',
       title: 'match word "\\"',
     },

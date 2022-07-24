@@ -30,7 +30,7 @@ function ParagraphLabel({ content, matches }: Props) {
   const highlightedContent = highlight(content, matches);
 
   return (
-    <p
+    <h3
       className={styles.container}
       /* eslint-disable-next-line react/no-danger */
       dangerouslySetInnerHTML={{ __html: highlightedContent }}
