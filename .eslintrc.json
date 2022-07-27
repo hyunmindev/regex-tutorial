@@ -26,6 +26,7 @@
     ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "@typescript-eslint/no-var-requires" : "off",
     "react/button-has-type": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
@@ -54,7 +55,8 @@
   },
   "env": {
     "browser": true,
-    "es2021": true
+    "es2022": true,
+    "node": true
   },
   "settings": {
     "import/resolver": {

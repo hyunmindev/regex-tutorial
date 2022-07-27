@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "seo": "node scripts/robots & node scripts/sitemap",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
