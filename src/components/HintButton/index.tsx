@@ -2,10 +2,16 @@ import Hint from '@/assets/icons/hint.svg';
 
 import styles from './index.module.scss';
 
-function HintButton() {
+interface Props {
+  inset: boolean;
+  onClick: () => void;
+}
+
+function HintButton({ onClick, inset }: Props) {
   return (
     <button
-      className={styles.container}
+      className={`${styles.container} ${inset ? styles.inset : ''}`}
+      onClick={onClick}
       type="button"
     >
       <Hint />
