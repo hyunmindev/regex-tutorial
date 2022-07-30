@@ -8,7 +8,7 @@ interface Props {
   onCloseEnd: () => void;
 }
 
-const delayMS = 300;
+const delayMS = 200;
 
 function HintModal({ content, onCloseBegin, onCloseEnd }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);

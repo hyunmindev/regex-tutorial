@@ -27,7 +27,7 @@
   width: 244px;
   height: 244px;
   border-radius: 48px;
-  animation: fade-in 0.3s ease-in;
+  animation: fade-in 0.2s ease-in;
   color: var(--text);
 
   & > * {
@@ -36,7 +36,7 @@
 }
 
 .unmount {
-  animation: fade-out 0.3s ease-out;
+  animation: fade-out 0.2s ease-out;
   box-shadow: unset;
   color: rgba(0, 0, 0, 0);
 }
