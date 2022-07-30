@@ -4,17 +4,19 @@ import styles from './index.module.scss';
 
 interface Props {
   content: string;
-  onClose: () => void;
+  onCloseBegin: () => void;
+  onCloseEnd: () => void;
 }
 
 const delayMS = 300;
 
-function HintModal({ content, onClose }: Props) {
+function HintModal({ content, onCloseBegin, onCloseEnd }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const delayedOnClose = () => {
+  const handleClose = () => {
+    onCloseBegin();
     contentRef.current?.classList.add(styles.unmount);
-    setTimeout(onClose, delayMS);
+    setTimeout(onCloseEnd, delayMS);
   };
 
   return (
@@ -22,7 +24,7 @@ function HintModal({ content, onClose }: Props) {
       <button
         aria-label="background"
         className={styles.background}
-        onClick={delayedOnClose}
+        onClick={handleClose}
       />
       <div
         ref={contentRef}

@@ -5,20 +5,27 @@ import HintModal from '@/components/HintModal';
 
 function HintContainer() {
   const [isShow, setIsShow] = useState(false);
-
-  const toggleModal = () => setIsShow(!isShow);
+  const [isHintButtonInset, setIsHintButtonInset] = useState(false);
 
   return (
     <>
       {isShow && (
         <HintModal
           content="WIP"
-          onClose={toggleModal}
+          onCloseBegin={() => {
+            setIsHintButtonInset(false);
+          }}
+          onCloseEnd={() => {
+            setIsShow(false);
+          }}
         />
       )}
       <HintButton
-        inset={isShow}
-        onClick={toggleModal}
+        inset={isHintButtonInset}
+        onClick={() => {
+          setIsShow(true);
+          setIsHintButtonInset(true);
+        }}
       />
     </>
   );
