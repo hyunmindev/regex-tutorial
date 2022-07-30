@@ -6,7 +6,6 @@ import Next from '@/assets/icons/next.svg';
 import Prev from '@/assets/icons/prev.svg';
 import AnswerInput from '@/components/AnswerInput';
 import Header from '@/components/Header';
-import HintButton from '@/components/HintButton';
 import HintContainer from '@/components/HintContainer';
 import ParagraphLabel from '@/components/ParagraphLabel';
 import TitleLabel from '@/components/TitleLabel';
