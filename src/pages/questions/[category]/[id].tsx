@@ -24,6 +24,7 @@ function Question() {
 
   const {
     id,
+    hint,
     title,
     flags,
     isLast,
@@ -99,7 +100,7 @@ function Question() {
           </Link>
         )}
       </div>
-      <HintContainer />
+      <HintContainer content={hint ?? 'coming soon'} />
     </>
   );
 }

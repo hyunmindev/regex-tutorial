@@ -8,6 +8,7 @@ export default {
       id: 0,
       paragraph: 'Hello world',
       title: 'match word "world"',
+      hint: 'hint 1',
     },
     {
       answers: ['simple'],
@@ -15,6 +16,7 @@ export default {
       id: 1,
       paragraph: 'This is simple tutorial.',
       title: 'match word "simple"',
+      hint: 'hint 2',
     },
     {
       answers: ['useful'],
@@ -22,6 +24,7 @@ export default {
       id: 2,
       paragraph: 'Regular expressions are very useful.',
       title: 'match word "useful"',
+      hint: 'hint 3',
     },
   ],
   simpleMatch: [
@@ -31,6 +34,7 @@ export default {
       id: 0,
       paragraph: '\\ is Backslash.',
       title: 'match word "\\"',
+      hint: 'hint 4',
     },
   ],
   complicatedMatch: [
@@ -40,6 +44,7 @@ export default {
       id: 0,
       paragraph: 'This is complexity tutorial.',
       title: 'match word "complexity" and "tutorial"',
+      hint: 'hint 5',
     },
     {
       answers: ['^is'],
@@ -47,6 +52,7 @@ export default {
       id: 1,
       paragraph: 'Is this complexity tutorial?',
       title: 'match word "is" not in "this"',
+      hint: 'hint 6',
     },
   ],
   mostComplicatedProblem: [
@@ -56,6 +62,7 @@ export default {
       id: 0,
       paragraph: 'wip',
       title: 'wip',
+      hint: 'hint 7',
     },
     {
       answers: ['wip'],
@@ -63,6 +70,7 @@ export default {
       id: 1,
       paragraph: 'wip',
       title: 'wip',
+      hint: 'hint 8',
     },
   ],
 } as { [key: string]: Question[] };

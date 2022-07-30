@@ -3,7 +3,11 @@ import { useState } from 'react';
 import HintButton from '@/components/HintButton';
 import HintModal from '@/components/HintModal';
 
-function HintContainer() {
+interface Props {
+  content: string;
+}
+
+function HintContainer({ content }: Props) {
   const [isShow, setIsShow] = useState(false);
   const [isHintButtonInset, setIsHintButtonInset] = useState(false);
 
@@ -11,7 +15,7 @@ function HintContainer() {
     <>
       {isShow && (
         <HintModal
-          content="WIP"
+          content={content}
           onCloseBegin={() => {
             setIsHintButtonInset(false);
           }}
