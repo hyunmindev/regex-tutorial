@@ -12,6 +12,7 @@
     "test:cypress": "cypress open"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.4",
     "canvas-confetti": "^1.5.1",
     "next": "12.2.2",
     "next-seo": "^5.5.0",
